@@ -1,5 +1,7 @@
 from django.test import TestCase
+from django.urls import reverse
 from django.core.management import call_command
+from rest_framework import status
 from catalog.models import Product, Category
 from builds.models import Build, BuildItem
 from builds.services.compatibility import evaluate_compatibility, evaluate_build
@@ -222,3 +224,61 @@ class CompatibilityEngineAdditionalRulesTests(TestCase):
         report = evaluate_build(build)
         self.assertTrue(report["is_compatible"])
         self.assertEqual(len(report["errors"]), 0)
+
+
+class BuildAPIEndpointsTests(TestCase):
+    """
+    Tests REST API endpoints for Builds and stateless compatibility evaluation.
+    """
+
+    @classmethod
+    def setUpTestData(cls):
+        call_command("seed_catalog", verbosity=0)
+
+    def setUp(self):
+        from rest_framework.test import APIClient
+        self.client = APIClient()
+
+    def test_stateless_compat_check_endpoint(self):
+        """POST /api/builds/compat-check/ returns immediate compatibility report."""
+        url = reverse("builds:compat-check")
+        data = {
+            "part_ids": [
+                "cpu-04", "mb-07", "ram-01", "gpu-08",
+                "storage-01", "psu-06", "case-06", "cooler-01",
+            ]
+        }
+        response = self.client.post(url, data, format="json")
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertFalse(response.data["is_compatible"])
+        self.assertEqual(response.data["errors"][0]["rule_id"], 1)
+
+    def test_build_crud_workflow(self):
+        """Test full build creation, item addition, evaluation, and deletion."""
+        # 1. Create build
+        create_url = reverse("builds:build-list-create")
+        res = self.client.post(create_url, {"name": "My Dream Gaming PC"}, format="json")
+        self.assertEqual(res.status_code, status.HTTP_201_CREATED)
+        build_id = res.data["id"]
+
+        # 2. Add CPU to build
+        add_url = reverse("builds:build-item-add", kwargs={"id": build_id})
+        res2 = self.client.post(add_url, {"product_id": "cpu-06"}, format="json")
+        self.assertEqual(res2.status_code, status.HTTP_200_OK)
+        self.assertEqual(res2.data["build"]["item_count"], 1)
+
+        # 3. Check compatibility of saved build
+        check_url = reverse("builds:build-check", kwargs={"id": build_id})
+        res3 = self.client.get(check_url)
+        self.assertEqual(res3.status_code, status.HTTP_200_OK)
+        self.assertTrue(res3.data["is_compatible"])
+
+        # 4. Remove component
+        remove_url = reverse(
+            "builds:build-item-remove", kwargs={"id": build_id, "category_id": "cpu"}
+        )
+        res4 = self.client.delete(remove_url)
+        self.assertEqual(res4.status_code, status.HTTP_200_OK)
+        self.assertEqual(res4.data["build"]["item_count"], 0)
+

@@ -1,5 +1,5 @@
 """
-URL configuration for PartFit (pc_buddy) project.
+URL configuration for PcLoom project.
 """
 
 from django.contrib import admin

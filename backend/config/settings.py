@@ -1,5 +1,5 @@
 """
-Django settings for PartFit (pc_buddy) project.
+Django settings for PcLoom project.
 """
 
 import os
@@ -14,7 +14,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 load_dotenv(BASE_DIR / ".env")
 
 # Core Settings
-SECRET_KEY = os.getenv("SECRET_KEY", "django-insecure-dev-partfit-key")
+SECRET_KEY = os.getenv("SECRET_KEY", "django-insecure-dev-pcloom-key")
 DEBUG = os.getenv("DEBUG", "True").lower() in ("true", "1", "yes")
 
 allowed_hosts_str = os.getenv("ALLOWED_HOSTS", "localhost,127.0.0.1")
@@ -82,7 +82,7 @@ if DB_ENGINE in ("postgres", "postgresql", "psycopg2"):
     DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.postgresql",
-            "NAME": os.getenv("DB_NAME", "pc_store_db"),
+            "NAME": os.getenv("DB_NAME", "pcloom_db"),
             "USER": os.getenv("DB_USER", "postgres"),
             "PASSWORD": os.getenv("DB_PASSWORD", "postgres"),
             "HOST": os.getenv("DB_HOST", "localhost"),

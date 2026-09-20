@@ -1,0 +1,11 @@
+id,name,brand,type,speed_mhz,modules,capacity_gb,cas_latency,source_url,notes
+ram-01,Vengeance LPX 16GB (2x8GB) DDR4-3200,Corsair,DDR4,3200,2,16,16,https://www.corsair.com/us/en/p/memory/cmk16gx4m2b3200c16/vengeancea-lpx-16gb-2x8gb-ddr4-dram-3200mhz-c16-memory-kit-black-cmk16gx4m2b3200c16,manufacturer
+ram-02,T-Force Vulcan Z 16GB (2x8GB) DDR4-3200,TeamGroup,DDR4,3200,2,16,16,https://www.teamgroupinc.com/en/product-detail/memory/T-FORCE/vulcan-z-ddr4-red/vulcan-z-ddr4-red-TLZRD416G3200HC16CDC01/,manufacturer
+ram-03,FURY Beast 32GB (2x16GB) DDR4-3200,Kingston,DDR4,3200,2,32,16,https://www.kingston.com/datasheets/KF432C16BBK2_32.pdf,manufacturer
+ram-04,Ripjaws V 32GB (2x16GB) DDR4-3600,G.Skill,DDR4,3600,2,32,16,https://www.gskill.com/specification/165/184/1562831115/F4-3600C16D-32GVKC-Specification,manufacturer
+ram-05,Ripjaws V 64GB (4x16GB) DDR4-3600,G.Skill,DDR4,3600,4,64,18,https://www.gskill.com/specification/165/184/1562833015/F4-3600C18Q-64GVK-Specification,"Quad-stick kit (useful for verifying RAM slot limit rules)"
+ram-06,Crucial 16GB (1x16GB) DDR5-4800,Crucial,DDR5,4800,1,16,40,https://www.crucial.com/memory/ddr5/ct16g48c40u5,manufacturer
+ram-07,Vengeance 32GB (2x16GB) DDR5-5600,Corsair,DDR5,5600,2,32,36,https://www.corsair.com/us/en/p/memory/cmk32gx5m2b5600c36/vengeance-32gb-2x16gb-ddr5-dram-5600mhz-c36-memory-kit-black-cmk32gx5m2b5600c36,manufacturer
+ram-08,Flare X5 32GB (2x16GB) DDR5-6000,G.Skill,DDR5,6000,2,32,30,https://www.gskill.com/specification/165/396/1673491774/F5-6000J3038F16GX2-FX5-Specification,Optimized for AMD EXPO
+ram-09,FURY Beast 32GB (2x16GB) DDR5-6000,Kingston,DDR5,6000,2,32,36,https://www.kingston.com/datasheets/KF560C36BBEK2-32.pdf,manufacturer
+ram-10,Crucial Pro 64GB (2x32GB) DDR5-5600,Crucial,DDR5,5600,2,64,46,https://www.crucial.com/memory/ddr5/cp2k32g56c46u5,manufacturer

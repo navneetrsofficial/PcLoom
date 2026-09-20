@@ -1,0 +1,11 @@
+id,name,brand,socket,cores,threads,base_clock_ghz,boost_clock_ghz,tdp_w,integrated_graphics,source_url,notes
+cpu-01,Ryzen 5 5600X,AMD,AM4,6,12,3.7,4.6,65,false,https://en.wikipedia.org/wiki/Ryzen#Zen_3,Verified via Wikipedia Zen 3 desktop table
+cpu-02,Ryzen 7 5800X,AMD,AM4,8,16,3.8,4.7,105,false,https://en.wikipedia.org/wiki/Ryzen#Zen_3,Verified via Wikipedia Zen 3 desktop table
+cpu-03,Ryzen 7 5700G,AMD,AM4,8,16,3.8,4.6,65,true,https://en.wikipedia.org/wiki/Ryzen#Zen_3,"APU with integrated Radeon Vega graphics"
+cpu-04,Ryzen 5 7600,AMD,AM5,6,12,3.8,5.1,65,true,https://en.wikipedia.org/wiki/Ryzen#Zen_4,Integrated RDNA 2 graphics
+cpu-05,Ryzen 7 7700X,AMD,AM5,8,16,4.5,5.4,105,true,https://en.wikipedia.org/wiki/Ryzen#Zen_4,Integrated RDNA 2 graphics
+cpu-06,Ryzen 7 7800X3D,AMD,AM5,8,16,4.2,5.0,120,true,https://en.wikipedia.org/wiki/Ryzen#Zen_4,3D V-Cache variant with integrated RDNA 2 graphics
+cpu-07,Core i3-12100F,Intel,LGA1700,4,8,3.3,4.3,58,false,https://en.wikipedia.org/wiki/Alder_Lake,F-suffix model without integrated graphics
+cpu-08,Core i5-12400,Intel,LGA1700,6,12,2.5,4.4,65,true,https://en.wikipedia.org/wiki/Alder_Lake,6 Performance cores with UHD Graphics 730
+cpu-09,Core i5-13600K,Intel,LGA1700,14,20,3.5,5.1,125,true,https://en.wikipedia.org/wiki/Raptor_Lake,"Base clock reflects P-cores (3.5 GHz); E-core base is 2.6 GHz"
+cpu-10,Core i7-12700K,Intel,LGA1700,12,20,3.6,5.0,125,true,https://en.wikipedia.org/wiki/Alder_Lake,"Base clock reflects P-cores (3.6 GHz); E-core base is 2.7 GHz"

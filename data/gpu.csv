@@ -1,0 +1,11 @@
+id,name,brand,chipset,vram_gb,length_mm,tdp_w,power_connectors,source_url,notes
+gpu-01,TUF Gaming GeForce RTX 4090 OC,ASUS,GeForce RTX 4090,24,348,450,1x 16-pin,https://www.asus.com/motherboards-components/graphics-cards/tuf-gaming/tuf-rtx4090-o24g-gaming/techspec/,manufacturer
+gpu-02,Speedster MERC 310 Radeon RX 7900 XTX,XFX,Radeon RX 7900 XTX,24,344,355,3x 8-pin,https://www.xfxforce.com/shop/xfx-speedster-merc-310-7900-xtx-black-edition,manufacturer
+gpu-03,GeForce RTX 4070 Ti GAMING X TRIO 12G,MSI,GeForce RTX 4070 Ti,12,337,285,1x 16-pin,https://www.msi.com/Graphics-Card/GeForce-RTX-4070-Ti-GAMING-X-TRIO-12G/Specification,manufacturer
+gpu-04,GeForce RTX 4080 SUPER WINDFORCE V2 16G,Gigabyte,GeForce RTX 4080 SUPER,16,330,320,1x 16-pin,https://www.gigabyte.com/Graphics-Card/GV-N408SWF3V2-16GD/sp,manufacturer
+gpu-05,PULSE AMD Radeon RX 7800 XT,Sapphire,Radeon RX 7800 XT,16,280,263,2x 8-pin,https://www.sapphiretech.com/en/consumer/pulse-radeon-rx-7800-xt-16g-gddr6#Specification,manufacturer
+gpu-06,GeForce RTX 4070 WINDFORCE OC 12G,Gigabyte,GeForce RTX 4070,12,261,200,1x 8-pin,https://www.gigabyte.com/Graphics-Card/GV-N4070WF3OC-12GD/sp,manufacturer
+gpu-07,GeForce RTX 3060 VENTUS 2X 12G OC,MSI,GeForce RTX 3060,12,235,170,1x 8-pin,https://www.msi.com/Graphics-Card/GeForce-RTX-3060-VENTUS-2X-12G-OC/Specification,manufacturer
+gpu-08,Dual GeForce RTX 4060 EVO OC,ASUS,GeForce RTX 4060,8,227,115,1x 8-pin,https://www.asus.com/motherboards-components/graphics-cards/dual/dual-rtx4060-o8g-evo/techspec/,manufacturer
+gpu-09,GeForce RTX 4060 Ti VENTUS 2X BLACK 8G OC,MSI,GeForce RTX 4060 Ti,8,199,160,1x 8-pin,https://www.msi.com/Graphics-Card/GeForce-RTX-4060-Ti-VENTUS-2X-BLACK-8G-OC/Specification,manufacturer
+gpu-10,GAMING GeForce RTX 4060 8GB SOLO,ZOTAC,GeForce RTX 4060,8,163,115,1x 8-pin,https://www.zotac.com/us/product/graphics_card/zotac-gaming-geforce-rtx-4060-8gb-solo#spec,manufacturer

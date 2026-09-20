@@ -1,0 +1,11 @@
+id,name,brand,wattage_w,efficiency,modular,form_factor,connectors,source_url,notes
+psu-01,500 W1,EVGA,500,80+ White,Non-Modular,ATX,"1x 24-pin; 1x 8-pin EPS; 2x 8-pin PCIe; 6x SATA",https://www.evga.com/products/product.aspx?pn=100-W1-0500-KR,manufacturer
+psu-02,MAG A550BN,MSI,550,80+ Bronze,Non-Modular,ATX,"1x 24-pin; 1x 8-pin EPS; 2x 8-pin PCIe; 5x SATA",https://www.msi.com/Power-Supply/MAG-A550BN/Specification,manufacturer
+psu-03,CX550,Corsair,550,80+ Bronze,Non-Modular,ATX,"1x 24-pin; 1x 8-pin EPS; 2x 8-pin PCIe; 5x SATA",https://www.corsair.com/us/en/p/psu/cp-9020277-na/cx-series-cx550-550-watt-80-plus-bronze-atx-power-supply-cp-9020277-na,manufacturer
+psu-04,RM750e,Corsair,750,80+ Gold,Fully Modular,ATX,"1x 24-pin; 2x 8-pin EPS; 3x 8-pin PCIe; 1x 16-pin 12VHPWR; 7x SATA",https://www.corsair.com/us/en/p/psu/cp-9020262-na/rme-series-rm750e-fully-modular-low-noise-atx-power-supply-cp-9020262-na,manufacturer
+psu-05,FOCUS GX-750,Seasonic,750,80+ Gold,Fully Modular,ATX,"1x 24-pin; 2x 8-pin EPS; 4x 8-pin PCIe; 10x SATA",https://seasonic.com/focus-gx,manufacturer
+psu-06,MAG A650BN,MSI,650,80+ Bronze,Non-Modular,ATX,"1x 24-pin; 1x 8-pin EPS; 2x 8-pin PCIe; 5x SATA",https://www.msi.com/Power-Supply/MAG-A650BN/Specification,manufacturer
+psu-07,Pure Power 12 M 750W,be quiet!,750,80+ Gold,Fully Modular,ATX,"1x 24-pin; 2x 8-pin EPS; 4x 8-pin PCIe; 1x 16-pin 12VHPWR; 6x SATA",https://www.bequiet.com/en/powersupply/4067,manufacturer
+psu-08,RM850x,Corsair,850,80+ Gold,Fully Modular,ATX,"1x 24-pin; 3x 8-pin EPS; 4x 8-pin PCIe; 14x SATA",https://www.corsair.com/us/en/p/psu/cp-9020200-na/rmx-series-rm850x-850-watt-80-plus-gold-fully-modular-atx-psu-cp-9020200-na,manufacturer
+psu-09,FOCUS GX-850,Seasonic,850,80+ Gold,Fully Modular,ATX,"1x 24-pin; 2x 8-pin EPS; 6x 8-pin PCIe; 10x SATA",https://seasonic.com/focus-gx,manufacturer
+psu-10,RM1000x,Corsair,1000,80+ Gold,Fully Modular,ATX,"1x 24-pin; 3x 8-pin EPS; 6x 8-pin PCIe; 14x SATA",https://www.corsair.com/us/en/p/psu/cp-9020201-na/rmx-series-rm1000x-1000-watt-80-plus-gold-fully-modular-atx-psu-cp-9020201-na,manufacturer

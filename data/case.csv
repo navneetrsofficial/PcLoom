@@ -1,0 +1,11 @@
+id,name,brand,supported_form_factors,max_gpu_length_mm,max_cooler_height_mm,psu_form_factor,source_url,notes
+case-01,MasterBox NR200,Cooler Master,Mini-ITX,330,155,SFX; SFX-L,https://www.coolermaster.com/en-global/products/masterbox-nr200/,Compact SFF enclosure
+case-02,Ridge,Fractal Design,Mini-ITX,335,70,SFX; SFX-L,https://www.fractal-design.com/products/cases/ridge/ridge/white/,"Slim console SFF chassis (70mm cooler clearance)"
+case-03,A4-H2O,Lian Li,Mini-ITX,322,55,SFX; SFX-L,https://lian-li.com/product/a4-h2o/,"Ultra-compact 11L SFF chassis (55mm cooler clearance)"
+case-04,Pop Mini Air,Fractal Design,Micro-ATX; Mini-ITX,365,170,ATX,https://www.fractal-design.com/products/cases/pop/pop-mini-air/rgb-black-core/,Compact micro-ATX chassis
+case-05,Prime AP201,ASUS,Micro-ATX; Mini-ITX,338,170,ATX,https://www.asus.com/motherboards-components/gaming-cases/prime/asus-prime-ap201-microatx-case/techspec/,manufacturer
+case-06,4000D AIRFLOW,Corsair,ATX; Micro-ATX; Mini-ITX,360,170,ATX,https://www.corsair.com/us/en/p/pc-cases/cc-9011200-ww/4000d-airflow-tempered-glass-mid-tower-atx-case-black-cc-9011200-ww,Standard ATX mid-tower reference
+case-07,H5 Flow,NZXT,ATX; Micro-ATX; Mini-ITX,365,165,ATX,https://nzxt.com/product/h5-flow,manufacturer
+case-08,North,Fractal Design,ATX; Micro-ATX; Mini-ITX,355,170,ATX,https://www.fractal-design.com/products/cases/north/north/charcoal-black/,manufacturer
+case-09,LANCOOL 216,Lian Li,ATX; Micro-ATX; Mini-ITX,392,180,ATX,https://lian-li.com/product/lancool-216/,High clearance ATX chassis
+case-10,Eclipse G360A,Phanteks,ATX; Micro-ATX; Mini-ITX,400,162,ATX,https://www.phanteks.store/products/phanteks-eclipse-g360a,manufacturer

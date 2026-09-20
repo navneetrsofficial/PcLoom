@@ -1,0 +1,11 @@
+id,name,brand,socket,chipset,form_factor,memory_type,memory_slots,max_memory_gb,m2_slots,sata_ports,source_url,notes
+mb-01,B550-A PRO,MSI,AM4,B550,ATX,DDR4,4,128,2,6,https://www.msi.com/Motherboard/B550-A-PRO/Specification,manufacturer
+mb-02,B550M DS3H,Gigabyte,AM4,B550,Micro-ATX,DDR4,4,128,2,4,https://www.gigabyte.com/Motherboard/B550M-DS3H-rev-1x/sp,manufacturer
+mb-03,ROG STRIX B550-I GAMING,ASUS,AM4,B550,Mini-ITX,DDR4,2,64,2,4,https://rog.asus.com/motherboards/rog-strix/rog-strix-b550-i-gaming-model/spec/,manufacturer
+mb-04,MAG B650 TOMAHAWK WIFI,MSI,AM5,B650,ATX,DDR5,4,256,3,6,https://www.msi.com/Motherboard/MAG-B650-TOMAHAWK-WIFI/Specification,manufacturer
+mb-05,B650M Pro RS,ASRock,AM5,B650,Micro-ATX,DDR5,4,192,3,4,https://www.asrock.com/mb/AMD/B650M%20Pro%20RS/index.asp#Specification,manufacturer
+mb-06,B650I AORUS ULTRA,Gigabyte,AM5,B650,Mini-ITX,DDR5,2,128,3,4,https://www.gigabyte.com/Motherboard/B650I-AORUS-ULTRA-rev-10/sp,manufacturer
+mb-07,PRO B660M-A DDR4,MSI,LGA1700,B660,Micro-ATX,DDR4,4,128,2,4,https://www.msi.com/Motherboard/PRO-B660M-A-DDR4/Specification,manufacturer
+mb-08,TUF GAMING B660-PLUS WIFI D4,ASUS,LGA1700,B660,ATX,DDR4,4,128,3,4,https://www.asus.com/motherboards-components/motherboards/tuf-gaming/tuf-gaming-b660-plus-wifi-d4/techspec/,manufacturer
+mb-09,Z690M-ITX/ax,ASRock,LGA1700,Z690,Mini-ITX,DDR4,2,64,2,4,https://www.asrock.com/mb/Intel/Z690M-ITXax/index.asp#Specification,manufacturer
+mb-10,MAG Z790 TOMAHAWK WIFI,MSI,LGA1700,Z790,ATX,DDR5,4,256,4,7,https://www.msi.com/Motherboard/MAG-Z790-TOMAHAWK-WIFI/Specification,manufacturer

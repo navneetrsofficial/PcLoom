@@ -1,0 +1,11 @@
+id,name,brand,type,interface,capacity_gb,form_factor,source_url,notes
+storage-01,980 PRO 1TB,Samsung,NVMe M.2 SSD,PCIe 4.0 x4,1000,M.2 2280,https://semiconductor.samsung.com/consumer-storage/internal-ssd/980pro/,manufacturer
+storage-02,990 PRO 2TB,Samsung,NVMe M.2 SSD,PCIe 4.0 x4,2000,M.2 2280,https://semiconductor.samsung.com/consumer-storage/internal-ssd/990-pro/,manufacturer
+storage-03,P3 Plus 1TB,Crucial,NVMe M.2 SSD,PCIe 4.0 x4,1000,M.2 2280,https://www.crucial.com/ssd/p3-plus/ct1000p3pssd8,manufacturer
+storage-04,Black SN850X 2TB,Western Digital,NVMe M.2 SSD,PCIe 4.0 x4,2000,M.2 2280,https://www.westerndigital.com/products/internal-drives/wd-black-sn850x-nvme-ssd,manufacturer
+storage-05,NV2 1TB,Kingston,NVMe M.2 SSD,PCIe 4.0 x4,1000,M.2 2280,https://www.kingston.com/datasheets/SNV2S_us.pdf,manufacturer
+storage-06,870 EVO 1TB,Samsung,SATA SSD,SATA 6Gb/s,1000,2.5-inch,https://semiconductor.samsung.com/consumer-storage/internal-ssd/870evo/,manufacturer
+storage-07,MX500 1TB,Crucial,SATA SSD,SATA 6Gb/s,1000,2.5-inch,https://www.crucial.com/ssd/mx500/ct1000mx500ssd1,manufacturer
+storage-08,A400 480GB,Kingston,SATA SSD,SATA 6Gb/s,480,2.5-inch,https://www.kingston.com/datasheets/SA400S37_us.pdf,manufacturer
+storage-09,BarraCuda 2TB,Seagate,HDD,SATA 6Gb/s,2000,3.5-inch,https://www.seagate.com/content/dam/seagate/migrated-assets/www-content/datasheets/pdfs/barracuda-3-5-DS1900-14-2005US-en_US.pdf,"Mechanical hard drive (7200 RPM)"
+storage-10,Blue 2TB,Western Digital,HDD,SATA 6Gb/s,2000,3.5-inch,https://documents.westerndigital.com/memory/wd-blue-desktop-sata-hdd-spec-sheet.pdf,"Mechanical hard drive (7200 RPM)"

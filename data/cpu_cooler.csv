@@ -1,0 +1,11 @@
+id,name,brand,type,height_mm,supported_sockets,tdp_rating_w,source_url,notes
+cooler-01,Peerless Assassin 120 SE,Thermalright,Air Cooler,155,"AM4; AM5; LGA1700",245,https://www.thermalright.com/product/peerless-assassin-120-se/,Dual tower air cooler
+cooler-02,NH-D15,Noctua,Air Cooler,168,"AM4; AM5; LGA1700",,https://noctua.at/en/nh-d15/specification,"Noctua uses proprietary NSPR 183; official wattage TDP left empty per honesty rules; height is 168mm with default fans"
+cooler-03,AK620,DeepCool,Air Cooler,160,"AM4; AM5; LGA1700",260,https://www.deepcool.com/products/Cooling/cpuaircoolers/AK620-High-Performance-CPU-Cooler-1700-AM5/2021/13067.shtml,manufacturer
+cooler-04,Dark Rock Pro 4,be quiet!,Air Cooler,163,"AM4; AM5; LGA1700",250,https://www.bequiet.com/en/cpucooler/1378,manufacturer
+cooler-05,Hyper 212 Black,Cooler Master,Air Cooler,152,"AM4; AM5; LGA1700",210,https://www.coolermaster.com/en-global/products/hyper-212-black/,manufacturer
+cooler-06,NH-L9i-17xx,Noctua,Air Cooler,37,LGA1700,,https://noctua.at/en/nh-l9i-17xx/specification,"Low-profile Intel LGA1700 only; wattage TDP not published by Noctua"
+cooler-07,NH-L9a-AM5,Noctua,Air Cooler,37,AM5,,https://noctua.at/en/nh-l9a-am5/specification,"Low-profile AMD AM5 only; wattage TDP not published by Noctua"
+cooler-08,Liquid Freezer II 240,ARCTIC,AIO Liquid Cooler,53,"AM4; AM5; LGA1700",250,https://www.arctic.de/en/Liquid-Freezer-II-240/ACFRE00046B,"Height represents pump block; radiator is 277x120x38mm"
+cooler-09,iCUE H100i RGB ELITE,Corsair,AIO Liquid Cooler,52,"AM4; AM5; LGA1700",250,https://www.corsair.com/us/en/p/cpu-coolers/cw-9060058-ww/icue-h100i-rgb-elite-liquid-cpu-cooler-cw-9060058-ww,"Height represents pump block; 240mm radiator"
+cooler-10,Kraken 240,NZXT,AIO Liquid Cooler,56,"AM4; AM5; LGA1700",250,https://nzxt.com/product/kraken-240,"Height represents pump block; 240mm radiator"

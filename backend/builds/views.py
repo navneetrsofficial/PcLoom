@@ -1,16 +1,20 @@
+from decimal import Decimal, InvalidOperation
 from rest_framework import generics, status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.permissions import AllowAny
-from drf_spectacular.utils import extend_schema
+from drf_spectacular.utils import extend_schema, OpenApiParameter, OpenApiTypes
 from catalog.models import Product
 from .models import Build, BuildItem
 from .services.compatibility import evaluate_compatibility, evaluate_build
+from .services.recommender import recommend_build
 from .serializers import (
     BuildSerializer,
     BuildDetailWithCompatSerializer,
     BuildItemAddSerializer,
     StatelessCompatCheckSerializer,
+    BuildRecommendRequestSerializer,
+    BuildShareSerializer,
 )
 
 
@@ -166,3 +170,73 @@ class BuildCheckView(APIView):
 
         report = evaluate_build(build)
         return Response(report, status=status.HTTP_200_OK)
+
+
+class BuildRecommendView(APIView):
+    """
+    Automated PC Build Recommendation Engine.
+    Given a target budget and purpose ('gaming', 'workstation', 'general'),
+    selects an optimal, 100% compatible combination of 8 components.
+    """
+
+    permission_classes = [AllowAny]
+
+    @extend_schema(
+        parameters=[
+            OpenApiParameter(
+                name="budget",
+                type=OpenApiTypes.FLOAT,
+                location=OpenApiParameter.QUERY,
+                description="Target budget in USD (e.g. 1200)",
+                default=1200,
+            ),
+            OpenApiParameter(
+                name="purpose",
+                type=OpenApiTypes.STR,
+                location=OpenApiParameter.QUERY,
+                description="System use-case ('gaming', 'workstation', 'general')",
+                default="gaming",
+            ),
+        ],
+        responses={200: dict},
+    )
+    def get(self, request, *args, **kwargs):
+        budget_raw = request.query_params.get("budget", "1200")
+        purpose = request.query_params.get("purpose", "gaming")
+
+        try:
+            budget = Decimal(budget_raw)
+        except (InvalidOperation, ValueError):
+            return Response(
+                {"error": f"Invalid budget value '{budget_raw}'. Must be a valid number."},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+
+        result = recommend_build(budget, purpose)
+        return Response(result, status=status.HTTP_200_OK)
+
+    @extend_schema(
+        request=BuildRecommendRequestSerializer,
+        responses={200: dict},
+    )
+    def post(self, request, *args, **kwargs):
+        serializer = BuildRecommendRequestSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+
+        budget = serializer.validated_data["budget"]
+        purpose = serializer.validated_data["purpose"]
+
+        result = recommend_build(budget, purpose)
+        return Response(result, status=status.HTTP_200_OK)
+
+
+class BuildShareView(generics.RetrieveAPIView):
+    """
+    Public read-only view of a shared build.
+    Accessible without authentication via shareable link.
+    """
+
+    permission_classes = [AllowAny]
+    queryset = Build.objects.prefetch_related("items__product__category")
+    serializer_class = BuildShareSerializer
+    lookup_field = "id"

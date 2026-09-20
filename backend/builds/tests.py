@@ -282,3 +282,73 @@ class BuildAPIEndpointsTests(TestCase):
         self.assertEqual(res4.status_code, status.HTTP_200_OK)
         self.assertEqual(res4.data["build"]["item_count"], 0)
 
+    def test_compatibility_score_and_rating(self):
+        """Verify 0-100 scoring logic on good, warning, and broken builds."""
+        # 1. Flawless Good Build -> Score 100, Flawless
+        good_url = reverse("builds:compat-check")
+        good_res = self.client.post(
+            good_url,
+            {"part_ids": ["cpu-06", "mb-04", "ram-08", "gpu-04", "storage-01", "psu-08", "case-06", "cooler-01"]},
+            format="json",
+        )
+        self.assertEqual(good_res.data["compatibility_score"], 100)
+        self.assertEqual(good_res.data["rating"], "Flawless")
+
+        # 2. Warning Build (low PSU headroom) -> Score 85, Excellent
+        warn_res = self.client.post(
+            good_url,
+            {"part_ids": ["cpu-10", "mb-08", "ram-03", "gpu-05", "storage-01", "psu-02", "case-06", "cooler-03"]},
+            format="json",
+        )
+        self.assertEqual(warn_res.data["compatibility_score"], 85)
+        self.assertEqual(warn_res.data["rating"], "Excellent")
+
+        # 3. Broken Build (Socket mismatch) -> Score 0, Incompatible
+        bad_res = self.client.post(
+            good_url,
+            {"part_ids": ["cpu-04", "mb-07", "ram-01", "gpu-08", "storage-01", "psu-06", "case-06", "cooler-01"]},
+            format="json",
+        )
+        self.assertEqual(bad_res.data["compatibility_score"], 0)
+        self.assertEqual(bad_res.data["rating"], "Incompatible")
+
+    def test_build_recommendation_endpoint_get(self):
+        """GET /api/builds/recommend/?budget=1500&purpose=gaming returns 100% compatible build."""
+        url = reverse("builds:build-recommend")
+        res = self.client.get(url, {"budget": 1500, "purpose": "gaming"})
+
+        self.assertEqual(res.status_code, status.HTTP_200_OK)
+        self.assertEqual(res.data["purpose"], "gaming")
+        self.assertTrue(res.data["compatibility"]["is_compatible"])
+        self.assertGreaterEqual(res.data["compatibility"]["compatibility_score"], 85)
+        self.assertLessEqual(res.data["total_price"], 1500)
+        # Verify all 8 categories are present
+        self.assertEqual(len(res.data["parts"]), 8)
+
+    def test_build_recommendation_endpoint_post(self):
+        """POST /api/builds/recommend/ with workstation purpose returns high-core workstation."""
+        url = reverse("builds:build-recommend")
+        res = self.client.post(url, {"budget": 2200, "purpose": "workstation"}, format="json")
+
+        self.assertEqual(res.status_code, status.HTTP_200_OK)
+        self.assertEqual(res.data["purpose"], "workstation")
+        self.assertTrue(res.data["compatibility"]["is_compatible"])
+        self.assertLessEqual(res.data["total_price"], 2200)
+
+    def test_build_share_endpoint(self):
+        """GET /api/builds/share/<id>/ returns public build with shareable URL."""
+        # Create a build first
+        build = Build.objects.create(name="Public Community Rig")
+        cpu = Product.objects.get(id="cpu-01")
+        BuildItem.objects.create(build=build, product=cpu, category=cpu.category)
+
+        url = reverse("builds:build-share", kwargs={"id": build.id})
+        res = self.client.get(url)
+
+        self.assertEqual(res.status_code, status.HTTP_200_OK)
+        self.assertEqual(res.data["name"], "Public Community Rig")
+        self.assertIn("shareable_url", res.data)
+        self.assertIn(str(build.id), res.data["shareable_url"])
+        self.assertIn("compatibility", res.data)
+
+

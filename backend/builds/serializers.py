@@ -63,3 +63,33 @@ class StatelessCompatCheckSerializer(serializers.Serializer):
         required=True,
         help_text="List of product IDs to evaluate (e.g. ['cpu-01', 'mb-01', 'ram-01'])",
     )
+
+
+from decimal import Decimal
+
+class BuildRecommendRequestSerializer(serializers.Serializer):
+    budget = serializers.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+        min_value=Decimal("500.00"),
+        default=Decimal("1200.00"),
+        help_text="Target budget in USD (minimum $500)",
+    )
+    purpose = serializers.ChoiceField(
+        choices=["gaming", "workstation", "general"],
+        default="gaming",
+        help_text="Primary system use-case ('gaming', 'workstation', or 'general')",
+    )
+
+
+class BuildShareSerializer(BuildDetailWithCompatSerializer):
+    shareable_url = serializers.SerializerMethodField()
+
+    class Meta(BuildDetailWithCompatSerializer.Meta):
+        fields = BuildDetailWithCompatSerializer.Meta.fields + ["shareable_url"]
+
+    def get_shareable_url(self, obj):
+        from django.conf import settings
+        frontend_url = getattr(settings, "FRONTEND_URL", "http://localhost:5173")
+        return f"{frontend_url}/builds/shared/{obj.id}"
+

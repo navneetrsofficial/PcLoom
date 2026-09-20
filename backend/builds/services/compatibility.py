@@ -417,10 +417,60 @@ ALL_RULES = [
 ]
 
 
+def calculate_compatibility_score(errors: List[Dict[str, Any]], warnings: List[Dict[str, Any]]) -> Dict[str, Any]:
+    """
+    Computes a 0-100 Compatibility Score with a qualitative rating.
+    - Hard ERROR exists: 0 / 100 ('Incompatible')
+    - Base score: 100
+    - Weighted deductions per warning:
+      * Rule 8 (PSU headroom < 25% buffer): -15 pts
+      * Rule 12 (Cooler TDP < CPU TDP): -15 pts
+      * Rule 13 (Unverified Cooler TDP - honesty rule): -5 pts
+      * Other warnings: -10 pts
+    """
+    if errors:
+        return {
+            "score": 0,
+            "rating": "Incompatible",
+            "rating_color": "#EF4444",
+        }
+
+    score = 100
+    for w in warnings:
+        rule_id = w.get("rule_id")
+        if rule_id in (8, 12):
+            score -= 15
+        elif rule_id == 13:
+            score -= 5
+        else:
+            score -= 10
+
+    score = max(10, min(100, score))
+
+    if score == 100:
+        rating = "Flawless"
+        color = "#10B981"
+    elif score >= 85:
+        rating = "Excellent"
+        color = "#3B82F6"
+    elif score >= 70:
+        rating = "Good"
+        color = "#F59E0B"
+    else:
+        rating = "Suboptimal"
+        color = "#F97316"
+
+    return {
+        "score": score,
+        "rating": rating,
+        "rating_color": color,
+    }
+
+
 def evaluate_compatibility(parts: Dict[str, Any]) -> Dict[str, Any]:
     """
     Evaluates a dictionary of components mapped by category_id ('cpu', 'motherboard', etc.).
-    Returns comprehensive compatibility report.
+    Returns comprehensive compatibility report with 0-100 score.
     """
     issues: List[CompatibilityIssue] = []
 
@@ -436,18 +486,22 @@ def evaluate_compatibility(parts: Dict[str, Any]) -> Dict[str, Any]:
     errors = [i.to_dict() for i in issues if i.severity == "ERROR"]
     warnings = [i.to_dict() for i in issues if i.severity == "WARNING"]
     estimated_draw = calculate_estimated_draw(parts)
+    score_data = calculate_compatibility_score(errors, warnings)
 
     is_compatible = len(errors) == 0
 
     if is_compatible and not warnings:
         summary = "All selected components are fully compatible."
     elif is_compatible and warnings:
-        summary = f"Components are compatible with {len(warnings)} warning(s) to review."
+        summary = f"Components are compatible ({score_data['rating']}, {score_data['score']}/100) with {len(warnings)} warning(s) to review."
     else:
         summary = f"Compatibility check failed with {len(errors)} error(s) and {len(warnings)} warning(s)."
 
     return {
         "is_compatible": is_compatible,
+        "compatibility_score": score_data["score"],
+        "rating": score_data["rating"],
+        "rating_color": score_data["rating_color"],
         "summary": summary,
         "estimated_power_w": estimated_draw,
         "errors": errors,

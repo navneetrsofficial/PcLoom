@@ -148,8 +148,8 @@ SIMPLE_JWT = {
 
 # OpenAPI & Swagger (drf-spectacular)
 SPECTACULAR_SETTINGS = {
-    "TITLE": "PartFit PC Store API",
-    "DESCRIPTION": "PC build configurator with rule-based compatibility engine and atomic inventory reservation",
+    "TITLE": "PcLoom API",
+    "DESCRIPTION": "PcLoom PC build configurator with rule-based compatibility engine, smart recommender, and atomic inventory reservation",
     "VERSION": "1.0.0",
     "SERVE_INCLUDE_SCHEMA": False,
     "COMPONENT_SPLIT_REQUEST": True,
@@ -162,7 +162,7 @@ CORS_ALLOWED_ORIGINS = [
 CORS_ALLOW_CREDENTIALS = True
 
 # Store settings
-STORE_NAME = os.getenv("STORE_NAME", "PartFit")
+STORE_NAME = os.getenv("STORE_NAME", "PcLoom")
 RESERVATION_TTL_MINUTES = int(os.getenv("RESERVATION_TTL_MINUTES", "15"))
 
 # Razorpay credentials

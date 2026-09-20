@@ -59,7 +59,7 @@ class Product(models.Model):
     )
     name = models.CharField(max_length=255)
     brand = models.CharField(max_length=100, db_index=True)
-    seller_name = models.CharField(max_length=100, default="PartFit Direct")
+    seller_name = models.CharField(max_length=100, default="PcLoom Direct")
     price = models.DecimalField(
         max_digits=10, decimal_places=2, default=Decimal("99.99")
     )

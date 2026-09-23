@@ -1,0 +1,240 @@
+/* ==========================================================================
+   Dynamic Assembly Rig Preview — Reactive Hardware Visualization Styles
+   ========================================================================== */
+
+.dynamic-rig-container {
+  background: linear-gradient(180deg, rgba(13, 19, 36, 0.85) 0%, rgba(6, 9, 18, 0.95) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
+}
+
+.rig-top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  padding-bottom: 16px;
+}
+
+.rig-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #38bdf8;
+  letter-spacing: 0.05em;
+  margin-bottom: 4px;
+}
+
+.rig-heading {
+  color: #ffffff;
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.rig-theme-pills {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.theme-pills-label {
+  color: #64748b;
+  font-size: 0.78rem;
+  font-weight: 600;
+  margin-right: 4px;
+}
+
+.rgb-dot-btn {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: transform 0.15s ease, border-color 0.15s ease;
+}
+
+.rgb-dot-btn:hover {
+  transform: scale(1.18);
+}
+
+.rgb-dot-btn.active-dot {
+  border-color: #ffffff;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+/* Viewport Frame */
+.rig-viewport-frame {
+  position: relative;
+  background: radial-gradient(circle at 50% 40%, rgba(30, 41, 59, 0.25) 0%, rgba(2, 6, 23, 0.9) 80%);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 12px;
+  overflow: hidden;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.rig-schematic-svg {
+  width: 100%;
+  max-height: 480px;
+  display: block;
+}
+
+/* Interactive SVG animations */
+.part-group {
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.part-group:hover {
+  opacity: 0.95;
+  filter: brightness(1.15);
+}
+
+.highlighted-part {
+  stroke: #38bdf8 !important;
+  stroke-width: 3px !important;
+  filter: drop-shadow(0 0 12px #38bdf8) !important;
+}
+
+/* Hotspots Strip */
+.hotspots-strip {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 14px;
+  width: 100%;
+}
+
+.hotspot-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(15, 23, 42, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 9999px;
+  padding: 5px 12px;
+  color: #94a3b8;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.18s ease;
+}
+
+.hotspot-chip:hover {
+  background: rgba(30, 41, 59, 0.9);
+  color: #ffffff;
+  border-color: rgba(99, 102, 241, 0.5);
+  transform: translateY(-1px);
+}
+
+/* Telemetry HUD */
+.rig-telemetry-hud {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+@media (max-width: 900px) {
+  .rig-telemetry-hud {
+    grid-template-columns: 1fr;
+  }
+}
+
+.telemetry-card {
+  background: rgba(15, 23, 42, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 12px;
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.telemetry-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.telemetry-label {
+  color: #94a3b8;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.telemetry-val-row {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+
+.telemetry-num {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: #f8fafc;
+}
+
+.telemetry-denom {
+  font-size: 0.8rem;
+  color: #64748b;
+  font-weight: 600;
+}
+
+.telemetry-caption {
+  font-size: 0.75rem;
+  color: #64748b;
+  font-weight: 500;
+}
+
+.text-success { color: #10b981; }
+.text-warning { color: #f59e0b; }
+.text-danger { color: #ef4444; }
+.text-info { color: #38bdf8; }
+
+.headroom-progress-track {
+  width: 100%;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 9999px;
+  overflow: hidden;
+  margin: 2px 0;
+}
+
+.headroom-progress-bar {
+  height: 100%;
+  border-radius: 9999px;
+  transition: width 0.3s ease;
+}
+
+.bar-normal { background: linear-gradient(90deg, #38bdf8, #818cf8); }
+.bar-danger { background: linear-gradient(90deg, #f59e0b, #ef4444); }
+
+.clearance-specs-row {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.clearance-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.75rem;
+}
+
+.c-label { color: #94a3b8; }
+.c-val { color: #f1f5f9; font-weight: 600; font-family: monospace; }

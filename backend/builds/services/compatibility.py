@@ -417,48 +417,63 @@ ALL_RULES = [
 ]
 
 
-def calculate_compatibility_score(errors: List[Dict[str, Any]], warnings: List[Dict[str, Any]]) -> Dict[str, Any]:
+def calculate_compatibility_score(errors: List[Dict[str, Any]], warnings: List[Dict[str, Any]], parts_count: int = 8) -> Dict[str, Any]:
     """
-    Computes a 0-100 Compatibility Score with a qualitative rating.
-    - Hard ERROR exists: 0 / 100 ('Incompatible')
-    - Base score: 100
-    - Weighted deductions per warning:
-      * Rule 8 (PSU headroom < 25% buffer): -15 pts
-      * Rule 12 (Cooler TDP < CPU TDP): -15 pts
-      * Rule 13 (Unverified Cooler TDP - honesty rule): -5 pts
-      * Other warnings: -10 pts
+    Computes a realistic full-range 0-100% Compatibility Score.
+    Rather than jumping strictly between 0% and 100%:
+    - Each hard ERROR deducts 25-35 pts (e.g. socket mismatch, power deficit).
+    - Each WARNING deducts 5-15 pts.
+    - Clamped gracefully into realistic ranges:
+      * 95 - 100%: Flawless Synergy
+      * 85 - 94%: Excellent / Compatible
+      * 75 - 84%: Good / Minor Notes
+      * 50 - 74%: Suboptimal / Clearance or Headroom Buffer
+      * 20 - 49%: Incompatible / Critical Mismatch
     """
-    if errors:
-        return {
-            "score": 0,
-            "rating": "Incompatible",
-            "rating_color": "#EF4444",
-        }
+    base_score = 100
 
-    score = 100
-    for w in warnings:
-        rule_id = w.get("rule_id")
-        if rule_id in (8, 12):
-            score -= 15
-        elif rule_id == 13:
-            score -= 5
+    # Deduct per error based on rule severity
+    for err in errors:
+        rule_id = err.get("rule_id", 0)
+        if rule_id in (1, 2):  # Socket or RAM type mismatch
+            base_score -= 35
+        elif rule_id in (3, 4, 5):  # Clearance or form factor mismatch
+            base_score -= 25
+        elif rule_id in (7,):  # Wattage deficit
+            base_score -= 30
         else:
-            score -= 10
+            base_score -= 20
 
-    score = max(10, min(100, score))
+    # Deduct per warning
+    for w in warnings:
+        rule_id = w.get("rule_id", 0)
+        if rule_id in (8, 12):
+            base_score -= 12
+        elif rule_id == 13:
+            base_score -= 5
+        else:
+            base_score -= 8
 
-    if score == 100:
+    # Ensure full range percentage
+    score = max(22, min(100, base_score))
+
+    if errors:
+        if score > 65:
+            score = 65  # Cap score if hard errors exist
+        rating = "Critical Conflicts" if score < 45 else "Conflicts Present"
+        color = "#EF4444"
+    elif score == 100:
         rating = "Flawless"
         color = "#10B981"
-    elif score >= 85:
+    elif score >= 88:
         rating = "Excellent"
         color = "#3B82F6"
-    elif score >= 70:
+    elif score >= 75:
         rating = "Good"
-        color = "#F59E0B"
+        color = "#10B981"
     else:
         rating = "Suboptimal"
-        color = "#F97316"
+        color = "#F59E0B"
 
     return {
         "score": score,
@@ -486,7 +501,7 @@ def evaluate_compatibility(parts: Dict[str, Any]) -> Dict[str, Any]:
     errors = [i.to_dict() for i in issues if i.severity == "ERROR"]
     warnings = [i.to_dict() for i in issues if i.severity == "WARNING"]
     estimated_draw = calculate_estimated_draw(parts)
-    score_data = calculate_compatibility_score(errors, warnings)
+    score_data = calculate_compatibility_score(errors, warnings, len(parts))
 
     is_compatible = len(errors) == 0
 

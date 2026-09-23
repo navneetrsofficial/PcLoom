@@ -4,6 +4,10 @@
  */
 
 export function getComponentImage(category, item = {}) {
+  if (item && item.id) {
+    return `/images/products/${item.id}.jpg`;
+  }
+
   const cat = (category || item.category || item.category_id || '').toLowerCase();
   const name = (item.name || '').toLowerCase();
   const brand = (item.brand || '').toLowerCase();

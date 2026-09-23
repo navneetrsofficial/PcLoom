@@ -36,6 +36,9 @@ const CATEGORY_ICONS = {
 
 // Map each category to its high-resolution product image
 function getComponentImage(category, item) {
+  if (item && item.id) {
+    return `/images/products/${item.id}.jpg`;
+  }
   if (category === 'cpu') {
     return item.brand === 'Intel' || item.name.includes('Core')
       ? '/images/intel_box.png'

@@ -302,7 +302,7 @@ export default function Footer({
           </div>
 
           <div className="footer-copyright">
-            <span>© 2026 PcLoom. Built by Navneet Sharma.</span>
+            <span>© 2026 PcLoom. All Rights Reserved. Built by Navneet Sharma.</span>
           </div>
         </div>
       </div>

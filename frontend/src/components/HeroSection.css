@@ -238,29 +238,57 @@
   color: #64748b;
 }
 
-/* User & Moon Hitboxes */
+/* User & Moon Hitboxes — Calibrated pixel-perfect to hero backdrop */
 .hitbox-user {
-  top: 3.83%;
-  left: 89.71%;
-  width: 2.39%;
-  height: 3.61%;
+  top: 2.95%;
+  left: 90.8%;
+  width: 2.45%;
+  height: 3.8%;
   border-radius: 50%;
   transition: all 0.2s ease;
+  background: transparent;
+  border: none;
+  cursor: pointer;
 }
 
 .hitbox-moon {
-  top: 3.83%;
-  left: 93.30%;
-  width: 2.39%;
-  height: 3.61%;
+  top: 2.95%;
+  left: 94.65%;
+  width: 2.45%;
+  height: 3.8%;
   border-radius: 50%;
   transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.hitbox-moon.is-light {
+  color: #fbbf24;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 0 16px rgba(251, 191, 36, 0.6);
+}
+
+.hero-theme-glyph {
+  pointer-events: none;
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), color 0.2s ease;
+}
+
+.hitbox-moon:hover .hero-theme-glyph {
+  transform: rotate(20deg) scale(1.15);
+}
+
+.hero-theme-glyph.sun-glyph {
+  color: #f59e0b;
 }
 
 .hitbox-user:hover,
 .hitbox-moon:hover {
-  background: rgba(255, 255, 255, 0.12);
-  box-shadow: 0 0 14px rgba(139, 92, 246, 0.4);
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 0 12px rgba(139, 92, 246, 0.45);
 }
 
 /* --------------------------------------------------------------------------

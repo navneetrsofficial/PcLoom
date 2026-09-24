@@ -1,3 +1,5 @@
+@import './light-mode.css';
+
 :root {
   --bg-color: #06080D;
   --bg-card: rgba(15, 20, 31, 0.7);

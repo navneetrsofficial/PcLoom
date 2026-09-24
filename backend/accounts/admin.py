@@ -5,10 +5,19 @@ from .models import User
 
 @admin.register(User)
 class UserAdmin(BaseUserAdmin):
-    list_display = ("email", "name", "is_staff", "is_active", "date_joined")
-    list_filter = ("is_staff", "is_superuser", "is_active")
-    ordering = ("email",)
+    list_display = (
+        "email",
+        "name",
+        "is_staff",
+        "is_active",
+        "date_joined",
+        "last_login",
+    )
+    list_filter = ("is_staff", "is_superuser", "is_active", "date_joined")
+    ordering = ("-date_joined",)
     search_fields = ("email", "name")
+    readonly_fields = ("date_joined", "last_login")
+    date_hierarchy = "date_joined"
 
     fieldsets = (
         (None, {"fields": ("email", "password")}),

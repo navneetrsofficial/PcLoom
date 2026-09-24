@@ -1,0 +1,672 @@
+/* ==========================================================================
+   PcLoom Light Theme Design System
+   Sleek, high-contrast, ultra-clean aesthetic with modern shadows & accents
+   ========================================================================== */
+
+:root[data-theme="light"],
+[data-theme="light"] {
+  --bg-color: #f8fafc;
+  --bg-card: rgba(255, 255, 255, 0.95);
+  --bg-card-hover: rgba(241, 245, 249, 0.98);
+  --border-subtle: #e2e8f0;
+  --border-focus: rgba(99, 102, 241, 0.6);
+
+  --text-primary: #0f172a;
+  --text-secondary: #334155;
+  --text-muted: #64748b;
+
+  --accent-purple: #7c3aed;
+  --accent-indigo: #4f46e5;
+  --accent-blue: #2563eb;
+  --accent-cyan: #0284c7;
+
+  --gradient-primary: linear-gradient(135deg, #7c3aed 0%, #4f46e5 45%, #2563eb 100%);
+  --gradient-text: linear-gradient(135deg, #6d28d9 0%, #4338ca 50%, #1d4ed8 100%);
+  --gradient-glow: radial-gradient(circle, rgba(124, 58, 237, 0.08) 0%, rgba(37, 99, 235, 0.03) 50%, transparent 70%);
+}
+
+/* --------------------------------------------------------------------------
+   1. Root Page & Backgrounds
+   -------------------------------------------------------------------------- */
+[data-theme="light"] body,
+[data-theme="light"] .pcloom-app-root {
+  background-color: #f8fafc !important;
+  color: #0f172a !important;
+}
+
+[data-theme="light"] .dashboard-wrapper-section {
+  background-color: #f8fafc !important;
+  border-top-color: #e2e8f0 !important;
+}
+
+/* Scrollbars */
+[data-theme="light"] ::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+[data-theme="light"] ::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+}
+[data-theme="light"] ::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* --------------------------------------------------------------------------
+   2. Dashboard Top Navbar
+   -------------------------------------------------------------------------- */
+[data-theme="light"] .dashboard-top-navbar {
+  background-color: rgba(255, 255, 255, 0.92) !important;
+  border-bottom: 1px solid #e2e8f0 !important;
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
+}
+
+[data-theme="light"] .brand-name {
+  color: #0f172a !important;
+}
+
+[data-theme="light"] .nav-link-btn {
+  color: #475569 !important;
+}
+
+[data-theme="light"] .nav-link-btn:hover {
+  color: #0f172a !important;
+  background: rgba(0, 0, 0, 0.04) !important;
+}
+
+[data-theme="light"] .nav-link-btn.nav-active {
+  color: #4f46e5 !important;
+  background: rgba(79, 70, 229, 0.08) !important;
+  font-weight: 700 !important;
+}
+
+[data-theme="light"] .navbar-search-box {
+  background: #f1f5f9 !important;
+  border: 1px solid #cbd5e1 !important;
+}
+
+[data-theme="light"] .navbar-search-box:focus-within {
+  border-color: #6366f1 !important;
+  background: #ffffff !important;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.12);
+}
+
+[data-theme="light"] .navbar-search-input {
+  color: #0f172a !important;
+}
+
+[data-theme="light"] .navbar-search-input::placeholder {
+  color: #94a3b8 !important;
+}
+
+[data-theme="light"] .navbar-icon-btn {
+  background: #f1f5f9 !important;
+  border: 1px solid #e2e8f0 !important;
+  color: #475569 !important;
+}
+
+[data-theme="light"] .navbar-icon-btn:hover {
+  background: #e2e8f0 !important;
+  color: #0f172a !important;
+}
+
+[data-theme="light"] .cart-badge {
+  background: #ef4444 !important;
+  color: #ffffff !important;
+}
+
+/* --------------------------------------------------------------------------
+   3. Dashboard Sidebar
+   -------------------------------------------------------------------------- */
+[data-theme="light"] .sidebar-nav-btn {
+  color: #475569 !important;
+}
+
+[data-theme="light"] .sidebar-icon {
+  color: #64748b !important;
+}
+
+[data-theme="light"] .sidebar-nav-btn:hover {
+  background: #e2e8f0 !important;
+  color: #0f172a !important;
+}
+
+[data-theme="light"] .sidebar-nav-btn:hover .sidebar-icon {
+  color: #0f172a !important;
+}
+
+[data-theme="light"] .sidebar-nav-btn.btn-active {
+  background: linear-gradient(135deg, #4f46e5 0%, #3b82f6 100%) !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 16px rgba(79, 70, 229, 0.25) !important;
+}
+
+[data-theme="light"] .sidebar-nav-btn.btn-active .sidebar-icon {
+  color: #ffffff !important;
+}
+
+[data-theme="light"] .sidebar-stat-card,
+[data-theme="light"] .sidebar-cta-card {
+  background: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04) !important;
+}
+
+[data-theme="light"] .sidebar-stat-title,
+[data-theme="light"] .cta-title {
+  color: #0f172a !important;
+}
+
+[data-theme="light"] .sidebar-stat-desc,
+[data-theme="light"] .cta-desc {
+  color: #64748b !important;
+}
+
+[data-theme="light"] .sidebar-btn-badge {
+  background: #f1f5f9 !important;
+  color: #475569 !important;
+}
+
+/* --------------------------------------------------------------------------
+   4. Banners & Header Containers
+   -------------------------------------------------------------------------- */
+[data-theme="light"] .components-catalog-header-banner,
+[data-theme="light"] .builder-header-banner,
+[data-theme="light"] .inpage-saved-header {
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%) !important;
+  border: 1px solid #e2e8f0 !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05) !important;
+}
+
+[data-theme="light"] .banner-title,
+[data-theme="light"] .inpage-saved-title,
+[data-theme="light"] .catalog-title {
+  color: #0f172a !important;
+}
+
+[data-theme="light"] .banner-subtitle,
+[data-theme="light"] .inpage-saved-desc,
+[data-theme="light"] .catalog-desc {
+  color: #475569 !important;
+}
+
+[data-theme="light"] .stat-pill {
+  background: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04) !important;
+}
+
+[data-theme="light"] .stat-label {
+  color: #64748b !important;
+}
+
+[data-theme="light"] .pill-btn {
+  background: #ffffff !important;
+  border: 1px solid #cbd5e1 !important;
+  color: #475569 !important;
+}
+
+[data-theme="light"] .pill-btn:hover {
+  background: #f1f5f9 !important;
+  color: #0f172a !important;
+}
+
+[data-theme="light"] .pill-btn.pill-active {
+  background: rgba(79, 70, 229, 0.1) !important;
+  border-color: #4f46e5 !important;
+  color: #4f46e5 !important;
+}
+
+/* --------------------------------------------------------------------------
+   5. Category Sub-Sidebar & Product Filters
+   -------------------------------------------------------------------------- */
+[data-theme="light"] .category-item-btn {
+  background: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+  color: #475569 !important;
+}
+
+[data-theme="light"] .category-item-btn:hover {
+  background: #f8fafc !important;
+  color: #0f172a !important;
+  border-color: #cbd5e1 !important;
+}
+
+[data-theme="light"] .category-item-btn.cat-active {
+  background: linear-gradient(135deg, rgba(79, 70, 229, 0.12) 0%, rgba(59, 130, 246, 0.1) 100%) !important;
+  border-color: #4f46e5 !important;
+  color: #4f46e5 !important;
+  font-weight: 700 !important;
+}
+
+[data-theme="light"] .category-item-btn.cat-active .cat-icon {
+  color: #4f46e5 !important;
+}
+
+[data-theme="light"] .cat-count-badge {
+  color: #94a3b8 !important;
+}
+
+[data-theme="light"] .current-cat-title {
+  color: #0f172a !important;
+}
+
+[data-theme="light"] .current-cat-desc {
+  color: #64748b !important;
+}
+
+[data-theme="light"] .products-filter-bar {
+  background: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+}
+
+[data-theme="light"] .filter-search-box,
+[data-theme="light"] .filter-select,
+[data-theme="light"] .sort-select-box,
+[data-theme="light"] .filter-icon-btn {
+  background: #f8fafc !important;
+  border: 1px solid #cbd5e1 !important;
+  color: #0f172a !important;
+}
+
+[data-theme="light"] .filter-search-input {
+  color: #0f172a !important;
+}
+
+[data-theme="light"] .sort-select {
+  color: #0f172a !important;
+}
+
+/* --------------------------------------------------------------------------
+   6. Product Cards (4x2 Grid)
+   -------------------------------------------------------------------------- */
+[data-theme="light"] .product-card {
+  background: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04) !important;
+}
+
+[data-theme="light"] .product-card:hover {
+  border-color: #818cf8 !important;
+  box-shadow: 0 12px 30px rgba(79, 70, 229, 0.12) !important;
+  transform: translateY(-3px) !important;
+}
+
+[data-theme="light"] .product-img-box {
+  background: #f8fafc !important;
+  border: 1px solid #f1f5f9 !important;
+}
+
+[data-theme="light"] .product-brand-tag {
+  background: #f1f5f9 !important;
+  color: #475569 !important;
+  border: 1px solid #e2e8f0 !important;
+}
+
+[data-theme="light"] .product-name {
+  color: #0f172a !important;
+}
+
+[data-theme="light"] .spec-pill {
+  background: #f1f5f9 !important;
+  border: 1px solid #e2e8f0 !important;
+}
+
+[data-theme="light"] .spec-pill-label {
+  color: #64748b !important;
+}
+
+[data-theme="light"] .spec-pill-val {
+  color: #0f172a !important;
+}
+
+[data-theme="light"] .product-price-val {
+  color: #0f172a !important;
+}
+
+[data-theme="light"] .card-add-btn {
+  background: #f1f5f9 !important;
+  color: #4f46e5 !important;
+  border: 1px solid #e2e8f0 !important;
+}
+
+[data-theme="light"] .card-add-btn:hover {
+  background: #4f46e5 !important;
+  color: #ffffff !important;
+}
+
+/* --------------------------------------------------------------------------
+   7. Build Workspace & Telemetry HUD
+   -------------------------------------------------------------------------- */
+[data-theme="light"] .workspace-hud-bar {
+  background: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05) !important;
+}
+
+[data-theme="light"] .hud-stat-box {
+  background: #f8fafc !important;
+  border: 1px solid #e2e8f0 !important;
+}
+
+[data-theme="light"] .hud-score-label,
+[data-theme="light"] .hud-stat-title {
+  color: #64748b !important;
+}
+
+[data-theme="light"] .hud-stat-value {
+  color: #0f172a !important;
+}
+
+[data-theme="light"] .slot-card {
+  background: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04) !important;
+}
+
+[data-theme="light"] .slot-card-active {
+  border-color: #6366f1 !important;
+  background: #fdf4ff !important;
+}
+
+[data-theme="light"] .slot-part-name {
+  color: #0f172a !important;
+}
+
+[data-theme="light"] .slot-part-price {
+  color: #0f172a !important;
+}
+
+[data-theme="light"] .slot-card-empty {
+  background: #f8fafc !important;
+  border: 1px dashed #cbd5e1 !important;
+}
+
+[data-theme="light"] .rig-interactive-card,
+[data-theme="light"] .rig-stage-container {
+  background: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05) !important;
+}
+
+/* --------------------------------------------------------------------------
+   8. Popular Builds Showcase
+   -------------------------------------------------------------------------- */
+[data-theme="light"] .popular-heading {
+  color: #0f172a !important;
+}
+
+[data-theme="light"] .popular-subheading {
+  color: #64748b !important;
+}
+
+[data-theme="light"] .view-all-link-btn {
+  background: #ffffff !important;
+  border: 1px solid #cbd5e1 !important;
+  color: #475569 !important;
+}
+
+[data-theme="light"] .view-all-link-btn:hover {
+  background: #f1f5f9 !important;
+  color: #0f172a !important;
+}
+
+[data-theme="light"] .popular-row-card {
+  background: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.05) !important;
+}
+
+[data-theme="light"] .popular-row-card:hover {
+  box-shadow: 0 10px 28px rgba(79, 70, 229, 0.12) !important;
+}
+
+[data-theme="light"] .row-build-title {
+  color: #0f172a !important;
+}
+
+[data-theme="light"] .row-sub-tag {
+  background: #f1f5f9 !important;
+  border: 1px solid #e2e8f0 !important;
+}
+
+[data-theme="light"] .row-spec-pill {
+  background: #f8fafc !important;
+  border: 1px solid #e2e8f0 !important;
+  color: #334155 !important;
+}
+
+[data-theme="light"] .row-price-val {
+  color: #0f172a !important;
+}
+
+/* --------------------------------------------------------------------------
+   9. Cart & Current Build Drawer
+   -------------------------------------------------------------------------- */
+[data-theme="light"] .cart-drawer-container {
+  background: #ffffff !important;
+  border-left: 1px solid #e2e8f0 !important;
+  box-shadow: -12px 0 40px rgba(0, 0, 0, 0.15) !important;
+  color: #0f172a !important;
+}
+
+[data-theme="light"] .build-header-title {
+  color: #0f172a !important;
+}
+
+[data-theme="light"] .single-build-toggle-box {
+  background: #f8fafc !important;
+  border: 1px solid #e2e8f0 !important;
+}
+
+[data-theme="light"] .toggle-checkbox-text strong {
+  color: #0f172a !important;
+}
+
+[data-theme="light"] .toggle-checkbox-text p {
+  color: #64748b !important;
+}
+
+[data-theme="light"] .compat-score-card {
+  background: #f8fafc !important;
+  border: 1px solid #e2e8f0 !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04) !important;
+}
+
+[data-theme="light"] .score-card-title {
+  color: #0f172a !important;
+}
+
+[data-theme="light"] .score-circle-num {
+  color: #0f172a !important;
+}
+
+[data-theme="light"] .score-bg-circle {
+  stroke: #e2e8f0 !important;
+}
+
+[data-theme="light"] .build-row-item {
+  background: #f8fafc !important;
+  border: 1px solid #e2e8f0 !important;
+}
+
+[data-theme="light"] .build-row-item:hover {
+  background: #f1f5f9 !important;
+  border-color: #cbd5e1 !important;
+}
+
+[data-theme="light"] .row-item-name {
+  color: #0f172a !important;
+}
+
+[data-theme="light"] .row-item-meta {
+  color: #64748b !important;
+}
+
+[data-theme="light"] .row-price-tag {
+  color: #0f172a !important;
+}
+
+[data-theme="light"] .qty-btn {
+  background: #e2e8f0 !important;
+  color: #0f172a !important;
+}
+
+[data-theme="light"] .qty-num {
+  color: #0f172a !important;
+}
+
+[data-theme="light"] .build-summary-box {
+  background: #f8fafc !important;
+  border: 1px solid #e2e8f0 !important;
+}
+
+[data-theme="light"] .summary-heading {
+  color: #0f172a !important;
+}
+
+[data-theme="light"] .summary-label {
+  color: #64748b !important;
+}
+
+[data-theme="light"] .summary-value {
+  color: #0f172a !important;
+}
+
+[data-theme="light"] .power-val {
+  color: #334155 !important;
+}
+
+/* --------------------------------------------------------------------------
+   10. Modals (Saved Builds, Compare, Imagine)
+   -------------------------------------------------------------------------- */
+[data-theme="light"] .saved-builds-modal-card,
+[data-theme="light"] .compare-modal-window,
+[data-theme="light"] .imagine-modal-window {
+  background: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.16) !important;
+  color: #0f172a !important;
+}
+
+[data-theme="light"] .modal-header-title,
+[data-theme="light"] .saved-build-title,
+[data-theme="light"] .compare-modal-title {
+  color: #0f172a !important;
+}
+
+[data-theme="light"] .saved-build-card {
+  background: #f8fafc !important;
+  border: 1px solid #e2e8f0 !important;
+}
+
+[data-theme="light"] .saved-build-price {
+  color: #0f172a !important;
+}
+
+[data-theme="light"] .compare-table th {
+  background: #f1f5f9 !important;
+  color: #0f172a !important;
+  border-bottom: 1px solid #cbd5e1 !important;
+}
+
+/* Component Inspector in Light Mode */
+[data-theme="light"] .inspector-card-content {
+  background: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05) !important;
+}
+
+[data-theme="light"] .inspector-artwork-box {
+  background: #f8fafc !important;
+  border: 1px solid #e2e8f0 !important;
+}
+
+[data-theme="light"] .inspect-part-title {
+  color: #0f172a !important;
+}
+
+[data-theme="light"] .inspect-specs-grid {
+  background: #f8fafc !important;
+  border: 1px solid #e2e8f0 !important;
+}
+
+[data-theme="light"] .spec-k {
+  color: #64748b !important;
+}
+
+[data-theme="light"] .spec-v {
+  color: #0f172a !important;
+}
+
+[data-theme="light"] .inspect-price {
+  color: #0f172a !important;
+}
+
+[data-theme="light"] .nav-pill {
+  background: #f1f5f9 !important;
+  border: 1px solid #e2e8f0 !important;
+  color: #64748b !important;
+}
+
+[data-theme="light"] .nav-pill.pill-selected {
+  background: #4f46e5 !important;
+  color: #ffffff !important;
+  border-color: #4f46e5 !important;
+}
+
+[data-theme="light"] .carousel-arrow {
+  background: #ffffff !important;
+  border: 1px solid #cbd5e1 !important;
+  color: #0f172a !important;
+}
+
+[data-theme="light"] .carousel-arrow:hover {
+  background: #4f46e5 !important;
+  color: #ffffff !important;
+  border-color: #4f46e5 !important;
+}
+
+[data-theme="light"] .compare-table td {
+  border-bottom: 1px solid #e2e8f0 !important;
+  color: #334155 !important;
+}
+
+/* --------------------------------------------------------------------------
+   11. Profile Page & Settings
+   -------------------------------------------------------------------------- */
+[data-theme="light"] .profile-page-root {
+  background: #f8fafc !important;
+  color: #0f172a !important;
+}
+
+[data-theme="light"] .profile-card,
+[data-theme="light"] .pref-box {
+  background: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04) !important;
+}
+
+[data-theme="light"] .pref-label {
+  color: #475569 !important;
+}
+
+[data-theme="light"] .pref-input,
+[data-theme="light"] .pref-select {
+  background: #f8fafc !important;
+  border: 1px solid #cbd5e1 !important;
+  color: #0f172a !important;
+}
+
+[data-theme="light"] .profile-user-name {
+  color: #0f172a !important;
+}
+
+/* --------------------------------------------------------------------------
+   12. Toast Feedback
+   -------------------------------------------------------------------------- */
+[data-theme="light"] .app-toast-notification {
+  background-color: #ffffff !important;
+  border: 1px solid #6366f1 !important;
+  color: #0f172a !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12) !important;
+}

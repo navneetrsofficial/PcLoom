@@ -1,12 +1,16 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { FastForward, Volume2, VolumeX } from 'lucide-react';
+import { FastForward, Volume2, VolumeX, Sun, Moon } from 'lucide-react';
 import './HeroSection.css';
 
 export default function HeroSection({
   onStartBuilding = () => {},
   onExploreCatalog = () => {},
   onOpenCompare = () => {},
-  onSearch = () => {}
+  onSearch = () => {},
+  theme = 'dark',
+  onToggleTheme = () => {},
+  currentUser = null,
+  onOpenAuth = () => {}
 }) {
   const videoRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(true);
@@ -202,18 +206,24 @@ export default function HeroSection({
         {/* User Profile Hitbox */}
         <button
           type="button"
+          id="hero-user-auth"
           className="hitbox-item hitbox-user"
-          title="Account Profile"
-          onClick={() => onSearch('User Profile')}
+          title={currentUser ? `Account: ${currentUser.name || currentUser.email}` : "Sign In / Register"}
+          onClick={onOpenAuth}
         />
 
         {/* Theme Toggle Hitbox */}
         <button
           type="button"
-          className="hitbox-item hitbox-moon"
-          title="Toggle Dark / Light Theme"
-          onClick={() => onSearch('Theme Toggled')}
-        />
+          id="hero-theme-toggle"
+          className={`hitbox-item hitbox-moon ${theme === 'light' ? 'is-light' : 'is-dark'}`}
+          title={`Switch to ${theme === 'dark' ? 'Light' : 'Dark'} Mode`}
+          onClick={onToggleTheme}
+        >
+          {theme === 'light' && (
+            <Sun size={17} className="hero-theme-glyph sun-glyph" />
+          )}
+        </button>
 
         {/* Primary Action Button: 'Start Building ->' */}
         <button

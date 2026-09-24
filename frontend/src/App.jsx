@@ -11,8 +11,18 @@ import CurrentBuildDrawer from './components/CurrentBuildDrawer';
 import SavedBuildsModal from './components/SavedBuildsModal';
 import ImagineVisualizerModal from './components/ImagineVisualizerModal';
 import CompareModal from './components/CompareModal';
+import AuthModal from './components/AuthModal';
+import Footer from './components/Footer';
 import { PRODUCTS_BY_CATEGORY } from './data/dashboardData';
-import { createSavedBuild, fetchSavedBuilds, deleteSavedBuild as apiDeleteBuild, checkCompatibility } from './services/api';
+import {
+  createSavedBuild,
+  fetchSavedBuilds,
+  deleteSavedBuild as apiDeleteBuild,
+  checkCompatibility,
+  fetchCurrentUser,
+  getStoredAuth,
+  clearStoredAuth
+} from './services/api';
 import './App.css';
 
 export default function App() {
@@ -130,6 +140,56 @@ export default function App() {
   const [selectedImagineBuildId, setSelectedImagineBuildId] = useState('saved-build-01');
   const [activeNotification, setActiveNotification] = useState(null);
   const [compatReport, setCompatReport] = useState(null);
+
+  // Multi-user authentication state
+  const [currentUser, setCurrentUser] = useState(() => getStoredAuth()?.user || null);
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
+  const [authModalTab, setAuthModalTab] = useState('register');
+
+  useEffect(() => {
+    fetchCurrentUser().then((user) => {
+      if (user) setCurrentUser(user);
+    });
+  }, []);
+
+  const handleOpenAuth = (tab = 'register') => {
+    setAuthModalTab(tab);
+    setIsAuthModalOpen(true);
+  };
+
+  const handleAuthSuccess = (user) => {
+    setCurrentUser(user);
+  };
+
+  const handleLogout = () => {
+    clearStoredAuth();
+    setCurrentUser(null);
+    showNotification('You have signed out successfully.');
+  };
+
+  // Theme state: 'dark' | 'light', persisted in localStorage
+  const [theme, setTheme] = useState(() => {
+    try {
+      return localStorage.getItem('pcloom_theme') || 'dark';
+    } catch {
+      return 'dark';
+    }
+  });
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+    try {
+      localStorage.setItem('pcloom_theme', theme);
+    } catch {}
+  }, [theme]);
+
+  const handleToggleTheme = () => {
+    setTheme((prev) => {
+      const next = prev === 'dark' ? 'light' : 'dark';
+      showNotification(`Switched to ${next === 'dark' ? 'Dark' : 'Light'} Mode`);
+      return next;
+    });
+  };
 
   // Sync saved builds to localStorage
   useEffect(() => {
@@ -393,7 +453,7 @@ export default function App() {
   };
 
   return (
-    <div className="pcloom-app-root">
+    <div className="pcloom-app-root" data-theme={theme}>
       {/* Toast Feedback */}
       {activeNotification && (
         <div className="app-toast-notification">
@@ -411,6 +471,10 @@ export default function App() {
           setActiveNav('Components');
           scrollToDashboard();
         }}
+        theme={theme}
+        onToggleTheme={handleToggleTheme}
+        currentUser={currentUser}
+        onOpenAuth={() => handleOpenAuth('register')}
       />
 
       {/* 2. Main Gaming Dashboard Container */}
@@ -443,6 +507,11 @@ export default function App() {
             scrollToDashboard();
           }}
           isSavedBuildsOpen={isSavedBuildsOpen}
+          theme={theme}
+          onToggleTheme={handleToggleTheme}
+          currentUser={currentUser}
+          onOpenAuth={() => handleOpenAuth('login')}
+          onLogout={handleLogout}
         />
 
         {/* Main Content Layout: Sidebar + Center Workspace / Encyclopedia */}
@@ -532,6 +601,7 @@ export default function App() {
                   scrollToDashboard();
                 }}
                 showNotification={showNotification}
+                currentUser={currentUser}
               />
             )}
 
@@ -625,6 +695,24 @@ export default function App() {
         </div>
       </section>
 
+      {/* Modern Professional SaaS Footer */}
+      <Footer
+        onNavigate={(tab) => {
+          if (tab === 'Home') {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          } else if (tab === 'Compare') {
+            setIsCompareOpen(true);
+          } else if (tab === 'My Builds') {
+            setIsSavedBuildsOpen(true);
+          } else {
+            setActiveNav(tab);
+            scrollToDashboard();
+          }
+        }}
+        onShareBuild={handleShareBuild}
+        onOpenCompare={() => setIsCompareOpen(true)}
+      />
+
       {/* 3. Add to Cart / Current Build Slide-in Drawer */}
       <CurrentBuildDrawer
         isOpen={isCartOpen}
@@ -675,6 +763,15 @@ export default function App() {
         }}
         onClearCompare={() => setCompareList([])}
         onSelectComponent={(item) => handleAddToBuild(item)}
+      />
+
+      {/* 7. Sign In & Registration Modal (Amazon-style Multi-User Auth) */}
+      <AuthModal
+        isOpen={isAuthModalOpen}
+        onClose={() => setIsAuthModalOpen(false)}
+        onAuthSuccess={handleAuthSuccess}
+        showNotification={showNotification}
+        initialTab={authModalTab}
       />
     </div>
   );

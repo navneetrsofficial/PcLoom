@@ -22,7 +22,16 @@ import DynamicRigPreview from './DynamicRigPreview';
 import { getComponentImage, formatSpecs } from '../utils/hardwareImages';
 import './ImagineVisualizerModal.css';
 
-const COMPONENT_ORDER = ['cpu', 'cooler', 'motherboard', 'ram', 'gpu', 'storage', 'psu', 'case'];
+const COMPONENT_ORDER = [
+  { key: 'cpu', label: 'CPU', fullName: 'Processor (CPU)' },
+  { key: 'cooler', label: 'Cooler', fullName: 'CPU Cooler' },
+  { key: 'motherboard', label: 'Motherboard', fullName: 'Motherboard' },
+  { key: 'ram', label: 'RAM', fullName: 'Memory (RAM)' },
+  { key: 'gpu', label: 'GPU', fullName: 'Graphics Card (GPU)' },
+  { key: 'storage', label: 'Storage', fullName: 'Solid State Storage (SSD)' },
+  { key: 'psu', label: 'PSU', fullName: 'Power Supply Unit (PSU)' },
+  { key: 'case', label: 'Case', fullName: 'Chassis / Cabinet' },
+];
 
 export default function ImagineVisualizerModal({
   isOpen = false,
@@ -41,16 +50,23 @@ export default function ImagineVisualizerModal({
 
   if (!isOpen) return null;
 
-  const currentCategoryKey = COMPONENT_ORDER[singleIndex];
-  const currentPart = buildParts[currentCategoryKey];
+  const currentCategoryObj = COMPONENT_ORDER[singleIndex];
+  const currentCategoryKey = currentCategoryObj.key;
+  const rawPart = buildParts[currentCategoryKey];
+  const currentPart = Array.isArray(rawPart) ? rawPart[0] : rawPart;
 
   const totalPrice = currentBuild?.totalPrice || Object.values(buildParts).reduce((sum, item) => {
     if (!item) return sum;
-    const p = typeof item?.price === 'number' ? item.price : parseFloat(item?.price) || 0;
+    const actualItem = Array.isArray(item) ? item[0] : item;
+    const p = typeof actualItem?.price === 'number' ? actualItem.price : parseFloat(actualItem?.price) || 0;
     return sum + (p < 2000 ? Math.round(p * 85) : Math.round(p));
   }, 0);
 
-  const installedCount = Object.values(buildParts).filter(Boolean).length;
+  const installedCount = Object.values(buildParts).filter((p) => {
+    if (!p) return false;
+    if (Array.isArray(p)) return p.length > 0;
+    return true;
+  }).length;
 
   const handleNextPart = () => {
     setSingleIndex((prev) => (prev + 1) % COMPONENT_ORDER.length);
@@ -172,58 +188,150 @@ export default function ImagineVisualizerModal({
                   />
                 </div>
               ) : (
-                /* Single Component Inspector Carousel */
-                <div className="single-part-carousel-view">
-                  <div className="carousel-nav-header">
-                    <button type="button" className="carousel-nav-btn" onClick={handlePrevPart}>
-                      <ChevronLeft size={18} />
-                      <span>Previous</span>
-                    </button>
+                /* Single Component Inspector View */
+                <div className="single-inspector-layout">
+                  {/* Category Navigation Pills */}
+                  <div className="inspector-nav-pills">
+                    {COMPONENT_ORDER.map((item, idx) => {
+                      const part = Array.isArray(buildParts[item.key])
+                        ? buildParts[item.key][0]
+                        : buildParts[item.key];
+                      const isInstalled = Boolean(part && (part.name || part.id));
+                      const isSelected = singleIndex === idx;
 
-                    <div className="carousel-counter">
-                      <span>{currentCategoryKey.toUpperCase()}</span>
-                      <span className="counter-dots">
-                        {singleIndex + 1} of {COMPONENT_ORDER.length}
-                      </span>
-                    </div>
-
-                    <button type="button" className="carousel-nav-btn" onClick={handleNextPart}>
-                      <span>Next</span>
-                      <ChevronRight size={18} />
-                    </button>
+                      return (
+                        <button
+                          key={item.key}
+                          type="button"
+                          className={`nav-pill ${isSelected ? 'pill-selected' : ''}`}
+                          onClick={() => setSingleIndex(idx)}
+                        >
+                          <span
+                            className="pill-dot"
+                            style={{
+                              background: isInstalled ? '#10b981' : '#64748b',
+                              boxShadow: isInstalled ? '0 0 8px rgba(16, 185, 129, 0.6)' : 'none'
+                            }}
+                          />
+                          <span>{item.label}</span>
+                        </button>
+                      );
+                    })}
                   </div>
 
-                  <div className="carousel-card-body">
-                    {currentPart ? (
-                      <div className="single-product-display">
-                        <div className="single-product-img-box">
-                          <img
-                            src={getComponentImage(currentCategoryKey, currentPart)}
-                            alt={currentPart.name}
-                            className="single-hero-img"
-                          />
-                        </div>
+                  {/* Main Component Card with Next / Prev Carousel Arrows */}
+                  <div className="inspector-showcase-card">
+                    <button
+                      type="button"
+                      className="carousel-arrow"
+                      onClick={handlePrevPart}
+                      title="Previous Component"
+                      aria-label="Previous component"
+                    >
+                      <ChevronLeft size={22} />
+                    </button>
 
-                        <div className="single-product-details">
-                          <span className="single-category-tag">
-                            {currentCategoryKey.toUpperCase()}
-                          </span>
-                          <h3 className="single-product-title">{currentPart.name}</h3>
-                          <span className="single-product-brand">Brand: {currentPart.brand}</span>
-
-                          <div className="single-specs-box">
-                            <h4>Architectural Specifications:</h4>
-                            <p>{formatSpecs(currentCategoryKey, currentPart).l1}</p>
-                            <p>{formatSpecs(currentCategoryKey, currentPart).l2}</p>
+                    <div className="inspector-card-content">
+                      {currentPart && (currentPart.name || currentPart.id) ? (
+                        <>
+                          <div className="inspector-artwork-box">
+                            <img
+                              src={getComponentImage(currentCategoryKey, currentPart)}
+                              alt={currentPart.name || currentCategoryObj.label}
+                              className="inspector-part-img"
+                            />
+                            <span className="inspect-angle-tag">Hardware Visualizer Artwork</span>
                           </div>
-                        </div>
-                      </div>
-                    ) : (
-                      <div className="single-empty-slot">
-                        <Box size={40} className="empty-slot-icon" />
-                        <h4>No component selected for {currentCategoryKey.toUpperCase()}</h4>
-                      </div>
-                    )}
+
+                          <div className="inspector-details-box">
+                            <div className="inspect-eyebrow">
+                              <span className="inspect-cat-badge">{currentCategoryObj.fullName}</span>
+                              <span className="inspect-status-badge badge-active">Mounted in Rig</span>
+                            </div>
+
+                            <h3 className="inspect-part-title">{currentPart.name}</h3>
+
+                            <div className="inspect-specs-grid">
+                              {currentPart.brand && (
+                                <div className="inspect-spec-row">
+                                  <span className="spec-k">Manufacturer / Brand</span>
+                                  <span className="spec-v">{currentPart.brand}</span>
+                                </div>
+                              )}
+                              <div className="inspect-spec-row">
+                                <span className="spec-k">Architectural Spec 1</span>
+                                <span className="spec-v">{formatSpecs(currentCategoryKey, currentPart).l1}</span>
+                              </div>
+                              <div className="inspect-spec-row">
+                                <span className="spec-k">Architectural Spec 2</span>
+                                <span className="spec-v">{formatSpecs(currentCategoryKey, currentPart).l2}</span>
+                              </div>
+                            </div>
+
+                            <div className="inspect-footer-row">
+                              <div className="inspect-price-box">
+                                <span className="spec-k" style={{ display: 'block', fontSize: '0.72rem' }}>Component Value</span>
+                                <span className="inspect-price">
+                                  ₹ {(currentPart.price ? (currentPart.price < 2000 ? currentPart.price * 85 : currentPart.price) : 0).toLocaleString('en-IN')}
+                                </span>
+                              </div>
+                              <button
+                                type="button"
+                                className="inspect-swap-btn"
+                                onClick={() => {
+                                  onClose();
+                                  onGoToBuilder();
+                                }}
+                              >
+                                Replace in PC Builder →
+                              </button>
+                            </div>
+                          </div>
+                        </>
+                      ) : (
+                        <>
+                          <div className="inspector-artwork-box" style={{ background: 'rgba(15, 23, 42, 0.3)' }}>
+                            <Box size={56} style={{ color: '#475569', strokeWidth: 1.5 }} />
+                            <span className="inspect-angle-tag">Slot Unoccupied</span>
+                          </div>
+
+                          <div className="inspector-details-box">
+                            <div className="inspect-eyebrow">
+                              <span className="inspect-cat-badge">{currentCategoryObj.fullName}</span>
+                              <span className="inspect-status-badge badge-pending">Slot Available</span>
+                            </div>
+
+                            <h3 className="inspect-part-title">No {currentCategoryObj.label} Selected</h3>
+
+                            <div className="empty-inspect-prompt">
+                              <p>
+                                This saved rig does not currently have a {currentCategoryObj.fullName} mounted. Choosing one in the builder completes your configuration and unlocks full telemetry.
+                              </p>
+                              <button
+                                type="button"
+                                className="inspect-choose-btn"
+                                onClick={() => {
+                                  onClose();
+                                  onGoToBuilder();
+                                }}
+                              >
+                                + Select {currentCategoryObj.label} in PC Builder
+                              </button>
+                            </div>
+                          </div>
+                        </>
+                      )}
+                    </div>
+
+                    <button
+                      type="button"
+                      className="carousel-arrow"
+                      onClick={handleNextPart}
+                      title="Next Component"
+                      aria-label="Next component"
+                    >
+                      <ChevronRight size={22} />
+                    </button>
                   </div>
                 </div>
               )}

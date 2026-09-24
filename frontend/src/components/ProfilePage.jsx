@@ -27,16 +27,24 @@ import './ProfilePage.css';
 
 export default function ProfilePage({
   onGoToBuilder = () => {},
-  showNotification = () => {}
+  showNotification = () => {},
+  currentUser = null
 }) {
   const [profile, setProfile] = useState(() => {
     try {
       const stored = localStorage.getItem('pcloom_customer_profile');
-      if (stored) return JSON.parse(stored);
+      if (stored) {
+        const parsed = JSON.parse(stored);
+        if (currentUser) {
+          parsed.fullName = currentUser.name || parsed.fullName;
+          parsed.email = currentUser.email || parsed.email;
+        }
+        return parsed;
+      }
     } catch (e) {}
     return {
-      fullName: 'Naveen Kumar',
-      email: 'naveen.pcbuilder@example.com',
+      fullName: currentUser?.name || 'Customer Account',
+      email: currentUser?.email || 'user@example.com',
       phone: '+91 98765 43210',
       alternatePhone: '+91 91234 56789',
       addressType: 'Home', // 'Home', 'Work', 'Other'

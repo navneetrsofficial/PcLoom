@@ -1,0 +1,636 @@
+/* ==========================================================================
+   Current Build / Add to Cart Drawer — Pixel-Perfect Match to User's Image
+   ========================================================================== */
+
+.cart-drawer-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(4, 6, 14, 0.7);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 1000;
+  display: flex;
+  justify-content: flex-end;
+  animation: fadeInDrawer 0.2s ease-out;
+}
+
+@keyframes fadeInDrawer {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.cart-drawer-container {
+  width: 100%;
+  max-width: 440px;
+  height: 100vh;
+  background: #090d1a;
+  border-left: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  flex-direction: column;
+  padding: 20px 20px 24px 20px;
+  box-shadow: -12px 0 40px rgba(0, 0, 0, 0.7);
+  overflow-y: auto;
+  gap: 16px;
+  animation: slideInRight 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  box-sizing: border-box;
+}
+
+@keyframes slideInRight {
+  from { transform: translateX(100%); }
+  to { transform: translateX(0); }
+}
+
+/* Top Bar */
+.drawer-top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 6px;
+}
+
+.drawer-eyebrow-text {
+  color: #64748b;
+  font-size: 0.76rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.drawer-close-btn {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #94a3b8;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.16s ease;
+}
+
+.drawer-close-btn:hover {
+  background: rgba(239, 68, 68, 0.2);
+  color: #f87171;
+  border-color: rgba(239, 68, 68, 0.4);
+}
+
+/* --------------------------------------------------------------------------
+   1. SINGLE BUILD TOGGLE CHECKBOX
+   -------------------------------------------------------------------------- */
+.single-build-toggle-box {
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 10px;
+  padding: 10px 14px;
+}
+
+.toggle-checkbox-label {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.toggle-checkbox-input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.toggle-checkbox-custom {
+  width: 18px;
+  height: 18px;
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(15, 23, 42, 0.8);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2px;
+  transition: all 0.16s ease;
+}
+
+.toggle-checkbox-input:checked + .toggle-checkbox-custom {
+  background: #10b981;
+  border-color: #10b981;
+  box-shadow: 0 0 8px rgba(16, 185, 129, 0.4);
+}
+
+.toggle-checkbox-input:checked + .toggle-checkbox-custom::after {
+  content: '✓';
+  color: #ffffff;
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+.toggle-text-block {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.toggle-main-question {
+  color: #f1f5f9;
+  font-size: 0.8rem;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.toggle-sub-note {
+  color: #64748b;
+  font-size: 0.7rem;
+  line-height: 1.3;
+}
+
+/* --------------------------------------------------------------------------
+   2. TOP COMPATIBILITY SCORE CARD (Exact from user's image)
+   -------------------------------------------------------------------------- */
+.compat-score-card {
+  background: linear-gradient(135deg, rgba(15, 23, 42, 0.75) 0%, rgba(10, 14, 28, 0.95) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  padding: 14px 18px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  cursor: pointer;
+  transition: all 0.18s ease;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+}
+
+.compat-score-card:hover {
+  border-color: rgba(99, 102, 241, 0.4);
+  transform: translateY(-1px);
+}
+
+.compat-card-error {
+  border-color: rgba(239, 68, 68, 0.4);
+}
+
+/* Score Circle Gauge */
+.score-circle-wrapper {
+  position: relative;
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.score-svg {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.score-bg-circle {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.08);
+  stroke-width: 3.5;
+}
+
+.score-fill-circle {
+  fill: none;
+  stroke: #10b981;
+  stroke-width: 3.5;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 0.6s ease;
+}
+
+.score-fill-circle.fill-error {
+  stroke: #ef4444;
+}
+
+.score-circle-num {
+  position: absolute;
+  color: #ffffff;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+/* Score Texts */
+.score-info-block {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.score-card-title {
+  color: #f1f5f9;
+  font-size: 0.88rem;
+  font-weight: 600;
+}
+
+.score-status-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.score-status-text {
+  color: #10b981;
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.score-status-text.text-error {
+  color: #ef4444;
+}
+
+.score-check-icon {
+  color: #10b981;
+}
+
+.score-arrow-icon {
+  color: #64748b;
+  transition: transform 0.2s ease;
+}
+
+.score-arrow-icon.arrow-rotate {
+  transform: rotate(90deg);
+}
+
+.compat-disabled-note {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(15, 23, 42, 0.5);
+  border: 1px dashed rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 10px 14px;
+  color: #94a3b8;
+  font-size: 0.75rem;
+}
+
+.compat-errors-dropdown {
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  border-radius: 8px;
+  padding: 10px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.errors-heading {
+  color: #fca5a5;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.error-item-msg {
+  color: #fecaca;
+  font-size: 0.72rem;
+  margin: 0;
+  line-height: 1.35;
+}
+
+/* --------------------------------------------------------------------------
+   3. CURRENT BUILD LIST (Exact from user's image)
+   -------------------------------------------------------------------------- */
+.current-build-section {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.build-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.build-header-title {
+  color: #ffffff;
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.clear-all-link {
+  background: none;
+  border: none;
+  color: #94a3b8;
+  font-size: 0.76rem;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 2px 4px;
+  transition: color 0.16s ease;
+}
+
+.clear-all-link:hover {
+  color: #ef4444;
+}
+
+.build-items-scroll-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  overflow-y: auto;
+  max-height: 330px;
+  padding-right: 4px;
+}
+
+.empty-build-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 40px 16px;
+  color: #64748b;
+  gap: 8px;
+}
+
+.empty-box-icon {
+  color: #475569;
+}
+
+.empty-build-state p {
+  color: #f1f5f9;
+  font-size: 0.88rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.empty-build-state span {
+  font-size: 0.75rem;
+}
+
+/* Individual Row Item */
+.build-row-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 10px;
+  background: rgba(15, 23, 42, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+  transition: all 0.16s ease;
+}
+
+.build-row-item:hover {
+  background: rgba(30, 41, 59, 0.55);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.row-icon-box {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: rgba(30, 41, 59, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #94a3b8;
+  flex-shrink: 0;
+}
+
+.row-info-col {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.row-category-name {
+  color: #64748b;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+}
+
+.row-product-name {
+  color: #f1f5f9;
+  font-size: 0.8rem;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Quantity Controls */
+.row-qty-controls {
+  display: flex;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 6px;
+  padding: 2px;
+  gap: 4px;
+}
+
+.qty-btn {
+  background: transparent;
+  border: none;
+  color: #94a3b8;
+  width: 18px;
+  height: 18px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.15s ease;
+}
+
+.qty-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+}
+
+.qty-num {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #ffffff;
+  min-width: 14px;
+  text-align: center;
+}
+
+.row-actions-col {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.row-price-tag {
+  color: #e2e8f0;
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
+.row-remove-btn {
+  background: none;
+  border: none;
+  color: #64748b;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.16s ease;
+}
+
+.row-remove-btn:hover {
+  color: #f87171;
+  background: rgba(239, 68, 68, 0.15);
+}
+
+/* --------------------------------------------------------------------------
+   4. BUILD SUMMARY (Exact from user's image)
+   -------------------------------------------------------------------------- */
+.build-summary-box {
+  background: linear-gradient(180deg, rgba(15, 23, 42, 0.7) 0%, rgba(9, 13, 26, 0.95) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: auto;
+}
+
+.summary-heading {
+  color: #ffffff;
+  font-size: 0.95rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.summary-line {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.summary-label {
+  color: #94a3b8;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.summary-value {
+  color: #ffffff;
+  font-size: 0.88rem;
+  font-weight: 600;
+}
+
+.price-total {
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.power-val {
+  color: #cbd5e1;
+}
+
+/* Score block in summary */
+.summary-score-block {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding-top: 6px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.score-label-with-icon {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.summary-check {
+  color: #10b981;
+}
+
+.score-val {
+  color: #10b981;
+  font-weight: 700;
+}
+
+.summary-progress-track {
+  width: 100%;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 9999px;
+  overflow: hidden;
+}
+
+.summary-progress-fill {
+  height: 100%;
+  border-radius: 9999px;
+  transition: width 0.4s ease;
+}
+
+/* --------------------------------------------------------------------------
+   5. ACTION BUTTONS (Exact from user's image)
+   -------------------------------------------------------------------------- */
+.drawer-action-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+.action-btn-primary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 12px;
+  background: linear-gradient(90deg, #4f46e5 0%, #3b82f6 100%);
+  border: none;
+  border-radius: 10px;
+  color: #ffffff;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.18s ease;
+  box-shadow: 0 4px 16px rgba(79, 70, 229, 0.35);
+}
+
+.action-btn-primary:hover {
+  filter: brightness(1.1);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 22px rgba(79, 70, 229, 0.5);
+}
+
+.action-btn-secondary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 10px;
+  background: rgba(15, 23, 42, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  color: #cbd5e1;
+  font-size: 0.84rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.18s ease;
+}
+
+.action-btn-secondary:hover {
+  background: rgba(30, 41, 59, 0.95);
+  border-color: rgba(99, 102, 241, 0.5);
+  color: #ffffff;
+  transform: translateY(-1px);
+}

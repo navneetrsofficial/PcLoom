@@ -50,3 +50,9 @@ dist-ssr/
 *.swo
 .DS_Store
 Thumbs.db
+
+# Scratch media in root
+/*.mp4
+/*.png
+/*.jpg
+/*.jpeg

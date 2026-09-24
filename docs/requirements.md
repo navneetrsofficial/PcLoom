@@ -1,7 +1,6 @@
-# PC Store: Requirements & Project Plan
+# PcLoom: Requirements & Project Plan
 
-> **Note**: Update this file at `docs/requirements.md` as decisions change.  
-> **Working Project Name**: `pc_buddy` (temporary placeholder)
+> **Official Project Name**: `PcLoom`
 
 ---
 
@@ -264,7 +263,7 @@
 ## 11. Project Structure
 
 ```
-pc-store/
+pcloom/
 ├── backend/
 │   ├── manage.py
 │   ├── requirements.txt

@@ -1,0 +1,159 @@
+/* ==========================================================================
+   PcLoom Preset Showcase — Pre-Configured Builds Styles
+   ========================================================================== */
+
+.presets-section {
+  padding: 80px 24px 100px;
+  background: radial-gradient(circle at 50% 100%, rgba(30, 27, 75, 0.3) 0%, #06080d 60%);
+  color: #f8fafc;
+}
+
+.presets-container {
+  max-width: 1380px;
+  margin: 0 auto;
+}
+
+.presets-header {
+  text-align: center;
+  max-width: 760px;
+  margin: 0 auto 48px;
+}
+
+.presets-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.76rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #c084fc;
+  margin-bottom: 12px;
+}
+
+.presets-title {
+  font-size: clamp(2rem, 3.8vw, 2.8rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  margin-bottom: 14px;
+}
+
+.presets-desc {
+  color: #94a3b8;
+  font-size: 1.02rem;
+  line-height: 1.6;
+}
+
+.presets-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 28px;
+}
+
+.preset-card {
+  background: rgba(15, 23, 42, 0.7);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.25s ease;
+}
+
+.preset-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(168, 85, 247, 0.4);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5), 0 0 24px rgba(124, 58, 237, 0.15);
+}
+
+.preset-top-banner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.preset-badge {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  background: rgba(124, 58, 237, 0.15);
+  color: #c084fc;
+  border: 1px solid rgba(168, 85, 247, 0.3);
+  padding: 3px 10px;
+  border-radius: 9999px;
+}
+
+.preset-price-val {
+  font-size: 1.45rem;
+  font-weight: 800;
+  color: #ffffff;
+}
+
+.preset-card-title {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 6px;
+}
+
+.preset-card-subtitle {
+  font-size: 0.88rem;
+  color: #94a3b8;
+  margin-bottom: 20px;
+}
+
+.preset-specs-box {
+  background: rgba(30, 41, 59, 0.5);
+  border-radius: 12px;
+  padding: 14px 16px;
+  margin-bottom: 20px;
+}
+
+.specs-headline {
+  font-size: 0.82rem;
+  color: #cbd5e1;
+  line-height: 1.45;
+  font-weight: 500;
+}
+
+.preset-guarantees-row {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.guarantee-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.78rem;
+  color: #94a3b8;
+}
+
+.text-emerald { color: #34d399; }
+.text-amber { color: #fbbf24; }
+
+.preset-load-btn {
+  margin-top: auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 20px;
+  background: linear-gradient(135deg, #7c3aed 0%, #9333ea 100%);
+  border: 1px solid rgba(168, 85, 247, 0.4);
+  border-radius: 12px;
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.preset-load-btn:hover {
+  filter: brightness(1.1);
+  box-shadow: 0 6px 20px rgba(124, 58, 237, 0.4);
+}
